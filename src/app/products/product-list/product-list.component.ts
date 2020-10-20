@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import { Product } from '../product.interface';
@@ -36,9 +37,13 @@ export class ProductListComponent implements OnInit {
 
   onSelect(product: Product) {
     this.selectedProduct = product;
+    this.router.navigateByUrl('/products/' + product.id);
   }
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.products$ = this.productService.products$;
